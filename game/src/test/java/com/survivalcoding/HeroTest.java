@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HeroTest {
 
     @Test
-    @DisplayName("공격시 자헤딜 1씩 들어옴")
+    @DisplayName("공격시 자해딜 1씩 들어옴")
     void attack() {
         // given 준비
         Hero hero = new Hero(); // 인스턴스 생성
