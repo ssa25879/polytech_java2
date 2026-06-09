@@ -14,6 +14,11 @@ public class Cleric {
     int mp;
 
     Cleric(String name, int hp, int mp) {
+        if (hp <= 0 || hp > 50) {
+            throw new IllegalArgumentException("HP는 최소 1, 최대 50이어야 합니다.");
+        } else if (mp < 0 || mp > 10) {
+            throw new IllegalArgumentException("MP는 최대 10이여야 합니다. 음수는 입력할 수 없습니다.");
+        }
         this.name = name;
         this.hp = hp;
         this.mp = mp;

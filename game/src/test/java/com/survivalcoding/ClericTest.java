@@ -7,12 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClericTest {
     @Test
-    @DisplayName("여러 객체 생성 테스트")
+    @DisplayName("여러 객체 생성 테스트, 입력받지 않은 값이 기본값으로 돌아가는지")
     void clericCreation() {
         // given
         final String testName = "이름";
         final int testHP = 30;
         final int testMP = 7;
+        final int overflowHP = Cleric.maxHP + 1;    // 항상 maxHP보다 1 크게하여 초과시킴
+        final int underflowHP = -1;
+        final int overflowMP = Cleric.maxMP + 1;    // 항상 maxMP보다 1 크게하여 초과시킴
+        final int underflowMP = -1;
+
 
         // when
         Cleric set1 = new Cleric(testName, testHP, testMP);
@@ -20,23 +25,38 @@ class ClericTest {
         Cleric set3 = new Cleric(testName);
 
         // then 검증
-        assertStats("set1 스탯 확인", set1, testName, testHP, testMP);
-        assertStats("set2 스탯 확인", set2, testName, testHP, Cleric.maxMP);
-        assertStats("set3 스탯 확인", set3, testName, Cleric.maxHP, Cleric.maxMP);
+        assertStats("set1 스탯 확인(전부 입력)", set1, testName, testHP, testMP);
+        assertStats("set2 스탯 확인(이름, HP 입력)", set2, testName, testHP, Cleric.maxMP);
+        assertStats("set3 스탯 확인(이름 입력)", set3, testName, Cleric.maxHP, Cleric.maxMP);
 
         // 생성 안되는지 검증
         assertThrows(IllegalArgumentException.class, () -> {
-            Cleric set4 = new Cleric();
+            Cleric noNameCase = new Cleric();
         });
 
+        // 최대, 최소 값을 지키지 않는 경우 생성이 안되는지 검증
+        assertAll("최대값, 최소값을 지키지 않았을 경우 확인",
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    Cleric overflowHPCase = new Cleric(testName, overflowHP);
+                }, "HP 최대값 초과 예외처리가 발생하지 않음"),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    Cleric overflowMPCase = new Cleric(testName, testHP, overflowMP);
+                }, "MP 최대값 초과 예외처리가 발생하지 않음"),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    Cleric underflowHPCase = new Cleric(testName, underflowHP);
+                }, "HP 음수, 0 입력 예외처리가 발생하지 않음"),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    Cleric underflowMPCase = new Cleric(testName, testHP, underflowMP);
+                }, "MP 음수 입력 예외처리가 발생하지 않음")
+        );
     }
 
     // 스탯 확인을 위한 임시 함수
-    private void assertStats(String headDescription, Cleric cleric, String exceptName, int exceptHP, int exceptMP) {
+    private void assertStats(String headDescription, Cleric cleric, String exceptedName, int exceptedHP, int exceptedMP) {
         assertAll(headDescription,
-                () -> assertEquals(exceptName, cleric.name, "이름 틀림"),
-                () -> assertEquals(exceptHP, cleric.hp, "HP 틀림"),
-                () -> assertEquals(exceptMP, cleric.mp, "mp 불일치")
+                () -> assertEquals(exceptedName, cleric.name, "이름 틀림"),
+                () -> assertEquals(exceptedHP, cleric.hp, "HP 틀림"),
+                () -> assertEquals(exceptedMP, cleric.mp, "MP 불일치")
         );
     }
 
