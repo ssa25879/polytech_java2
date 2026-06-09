@@ -3,15 +3,30 @@ package com.survivalcoding;
 import java.util.Random;
 
 public class Cleric {
-    final int maxMP = 10;
-    final int maxHP = 50;
+    static final int maxMP = 10;
+    static final int maxHP = 50;
     final int selfAidMPCost = 5;
     final int randBoundary = 3;
     final Random rand = new Random();
 
     String name;
-    int hp;
+    int hp = maxHP;
     int mp = maxMP;
+
+    Cleric(String name, int hp, int mp) {
+        this.name = name;
+        this.hp = hp;
+        this.mp = mp;
+    }
+
+    Cleric(String name, int hp) {
+        this.name = name;
+        this.hp = hp;
+    }
+
+    Cleric(String name) {
+        this.name = name;
+    }
 
     void selfAid() {
         // 5 미만일 때 실패하는 로직 구현

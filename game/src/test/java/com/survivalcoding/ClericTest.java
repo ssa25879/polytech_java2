@@ -16,7 +16,7 @@ class ClericTest {
         final int mpEdgeCase = 4;
 
         // given 준비
-        Cleric test1 = new Cleric();
+        Cleric test1 = new Cleric("testCleric1");
         test1.hp = initSelfAidHP;
         test1.mp = initSelfAidMP;
 
@@ -45,12 +45,12 @@ class ClericTest {
     void pray() {
         // 초기값 준비
         final int initPrayMP = 5;
-        final int overflowInitPrayMP = 9;
+        final int overflowInitPrayMP = 7;
         final int randTestSecond = 0;
         final int overflowTestSec = 3;
 
         //given 준비
-        Cleric test2 = new Cleric();
+        Cleric test2 = new Cleric("testCleric2");
         int tmp;    // 관측용 변수 생성
 
         // 초기값
@@ -62,10 +62,12 @@ class ClericTest {
         // then 검증
         // 피드백 이후 assert 관련 함수들을 찾아서 랜덤값 작동 확인 방법 개선
         // pray(int second)는 second + (0 ~ 2) 이기 때문에, 회복량은 (현재MP ~ 현재MP + 2) 가 되어야 함.
-        assertTrue(tmp >= initPrayMP && tmp <= (initPrayMP + 2));
+        assertTrue(tmp >= 0 && tmp <= 2, "랜덤함수 테스트실패");
+        assertTrue(test2.mp >= initPrayMP && test2.mp <= (initPrayMP + 2), "실제 마나 회복 테스트실패");
 
         // 초기값 9로 maxMP를 넘기는 상황을 연축
         test2.mp = overflowInitPrayMP;
+        final int correctAnswer = Cleric.maxMP - test2.mp;
 
         // when 실행
         // 무조건 maxMP를 넘기므로 1이 출력되도록 실행
@@ -73,8 +75,7 @@ class ClericTest {
 
         // then 검증
         // maxMP의 값이 10이기에 로직상 tmp에는 (최대MP - 현재MP)의 값이 담겨있어야함.
-        final int correctAnswer = test2.maxMP - test2.mp;
-        assertEquals(correctAnswer, tmp);
+        assertEquals(correctAnswer, tmp, "최대 마나 테스트실패");
 
         /*
         // 피드백 수정 전

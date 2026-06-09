@@ -12,5 +12,7 @@ public class Main {
 
         System.out.println(hero.hp);
 
+        Wizard wizard = new Wizard();
+
     }
 }
