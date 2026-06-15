@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HeroTest {
 
@@ -14,16 +15,24 @@ class HeroTest {
         Hero hero = new Hero(); // 인스턴스 생성
 
         // when 실행
-        hero.hp = 50;
+        hero.setHP(50);
         hero.attack();
 
         // then 검증
-        assertEquals(49, hero.hp);
+        assertEquals(49, hero.getHp());
 
         // when 실행
         hero.attack();
 
         // then 검증
-        assertEquals(48, hero.hp);
+        assertEquals(48, hero.getHp());
+    }
+
+    @Test
+    void setName() {
+        Hero hero = new Hero();
+
+        assertThrows(IllegalArgumentException.class, () -> hero.setName("1"));
+
     }
 }
