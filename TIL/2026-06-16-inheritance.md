@@ -5,8 +5,9 @@
 - `assertDoesNotThrow(() -> mainTestWand.setPower(setRandomDoubleInRange), "정상 값 입력시 예외발생하는 오류 발생");` 와 같은
   랜덤값을 이용한 테스트는 지양하는것이 좋음.
     - 말 그대로 랜덤값이다보니, 성공 실패가 갈릴 수 있음
-    - 경곗값 테스트로 전환하여 진행할 것
+    - 경계값 테스트로 전환하여 진행할 것
 - `@BeforeEach` 를 이용하여 매 테스트 실행 전에 준비작업 (`Wand testWand = new Wand();` 와 같은) 을 자동화 할 수 있음
+- 코드 리뷰나 협업할 때 편하도록 한 눈에 들어올 수 있게 코드 길이를 조절할 것
 
 ---
 
