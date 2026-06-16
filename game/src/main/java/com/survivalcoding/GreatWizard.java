@@ -53,8 +53,11 @@ public class GreatWizard extends Wizard {
             throw new IllegalArgumentException("Hero는 null 값이 올 수 없습니다.");
         }
         if (this.getMP() >= 50) {
+            this.setMP(this.getMP() - 50);
             hero.setHP(hero.getMaxHP());
             System.out.println("슈퍼 힐을 시전했습니다. " + hero.getName() + " HP : " + hero.getHP());
+        } else {
+            System.out.println("마나가 부족합니다.");
         }
     }
 }

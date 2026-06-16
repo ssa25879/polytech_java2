@@ -18,6 +18,7 @@ class Hero
 {
     - int hp
     - int maxHP
+    - String name
 
     + String getName()
     + int getHP()
@@ -28,6 +29,7 @@ class Hero
 
     + void attack()
     + void run()
+    + void slip()
 }
 
 

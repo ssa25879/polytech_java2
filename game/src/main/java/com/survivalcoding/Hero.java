@@ -12,6 +12,19 @@ public class Hero {
     private int maxHP = 100;
 
 
+    public Hero(String name, int hp) {
+        setName(name);
+        setHP(hp);
+    }
+
+    public Hero(String name) {
+        this(name, defaultHeroHP);
+    }
+
+    public Hero() {
+        this(defaultHeroName, defaultHeroHP);
+    }
+
     static void setRandomMoney() {
         money = new Random().nextInt(1000);
 
@@ -41,7 +54,7 @@ public class Hero {
     }
 
     public void setHP(int hp) {
-        this.hp = Math.min(hp, maxHP);
+        this.hp = Math.clamp(hp, 0, maxHP);
     }
 
     public int getMaxHP() {
@@ -50,19 +63,6 @@ public class Hero {
 
     public void setMaxHP(int maxHP) {
         this.maxHP = Math.max(maxHP, 0);
-    }
-
-    public Hero(String name, int hp) {
-        this.name = name;
-        this.hp = hp;
-    }
-
-    public Hero(String name) {
-        this(name, defaultHeroHP);
-    }
-
-    public Hero() {
-        this(defaultHeroName, defaultHeroHP);
     }
     // 나는 공격하면 hp 가 1씩 빠진다
 

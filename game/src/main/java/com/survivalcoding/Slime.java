@@ -32,6 +32,9 @@ public class Slime {
 
     public void setMaxHP(int maxHP) {
         this.maxHP = Math.max(maxHP, 0);
+        if (this.getHP() < this.maxHP) {
+            this.setHP(this.maxHP);
+        }
     }
 
     public void attack(Hero hero) {
