@@ -3,6 +3,8 @@ package com.survivalcoding;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,7 +30,8 @@ class PersonTest {
     void getAge() {
         // given
         Person testPerson = new Person(testName, testYear);
-        final int answerAge = Person.currentYear - testPerson.getBirthYear();
+        final int currentYear = LocalDate.now().getYear();
+        final int answerAge = currentYear - testPerson.getBirthYear();
 
         // when then
         assertEquals(answerAge, testPerson.getAge());

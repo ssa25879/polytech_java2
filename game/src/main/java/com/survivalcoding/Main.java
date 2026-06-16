@@ -1,5 +1,6 @@
 package com.survivalcoding;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +16,10 @@ public class Main {
         List에 담긴 모든 Person 인스턴스의 이름을 표시하시오.
          */
         ArrayList<Person> personArrayList = new ArrayList<>();
+        int currentYear = LocalDate.now().getYear();
 
-        Person per1 = new Person("홍길동", Person.currentYear - 20);
-        Person per2 = new Person("한석봉", Person.currentYear - 25);
+        Person per1 = new Person("홍길동", currentYear - 20);
+        Person per2 = new Person("한석봉", currentYear - 25);
 
         personArrayList.add(per1);
         personArrayList.add(per2);
