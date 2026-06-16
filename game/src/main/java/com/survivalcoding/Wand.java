@@ -1,14 +1,3 @@
-/*
-연습문제 1.
-Wand 클래스와 Wizard 클래스의 각 setter 메소드에 대해, 아래의 4가지 규칙에 따라 인수의 타당성 검사를 추가하시오.
-부정한 값이 설정 될 경우에는 “throw new IllegalArgumentException(“메세지");” 를 작성하여 프로그램을 중단 시킵니다.
-마법사나 지팡이의 이름은 null 일 수 없고, 반드시 3문자 이상이어야 한다
-지팡이의 마력은 0.5 이상 100.0 이하여야 한다.
-마법사의 지팡이는 null 일 수 없다.
-마법사의 MP는 0 이상이어야 한다.
-HP가 음수가 되는 상황에서는 대신 0을 설정 되도록 한다.
- */
-
 package com.survivalcoding;
 
 public class Wand {
@@ -23,7 +12,7 @@ public class Wand {
         setName(name);
         setPower(power);
     }
-    
+
     public String getName() {
         return name;
     }
