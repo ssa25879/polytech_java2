@@ -9,19 +9,14 @@ public class Cleric {
     final int randBoundary = 3;
     final Random rand = new Random();
 
-    String name;
-    int hp;
-    int mp;
+    private String name;
+    private int hp;
+    private int mp;
 
     Cleric(String name, int hp, int mp) {
-        if (hp <= 0 || hp > 50) {
-            throw new IllegalArgumentException("HP는 최소 1, 최대 50이어야 합니다.");
-        } else if (mp < 0 || mp > 10) {
-            throw new IllegalArgumentException("MP는 최대 10이여야 합니다. 음수는 입력할 수 없습니다.");
-        }
-        this.name = name;
-        this.hp = hp;
-        this.mp = mp;
+        this.setName(name);
+        this.setHP(hp);
+        this.setMP(mp);
     }
 
     Cleric(String name, int hp) {
@@ -32,17 +27,45 @@ public class Cleric {
         this(name, maxHP, maxMP);
     }
 
-    Cleric() {
-        throw new IllegalArgumentException("스탯을 입력하지 않은 클레릭은 생성될 수 없습니다.");
+
+    public int getSelfAidMPCost() {
+        return selfAidMPCost;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("이름은 null값 일 수 없습니다.");
+        }
+        this.name = name;
+    }
+
+    public int getHP() {
+        return hp;
+    }
+
+    public void setHP(int hp) {
+        this.hp = Math.clamp(hp, 0, maxHP);
+    }
+
+    public int getMP() {
+        return mp;
+    }
+
+    public void setMP(int mp) {
+        this.mp = Math.clamp(mp, 0, maxMP);
     }
 
     void selfAid() {
         // 5 미만일 때 실패하는 로직 구현
-        if (mp < selfAidMPCost) {
+        if (this.getMP() < selfAidMPCost) {
             System.out.println("MP가 부족합니다.");
             return;
         }
-        mp -= selfAidMPCost;
+        this.setMP(this.getMP() - selfAidMPCost);
         hp = maxHP;
     }
 

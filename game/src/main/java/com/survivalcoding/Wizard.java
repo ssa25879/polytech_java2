@@ -15,9 +15,12 @@ public class Wizard {
     static final int nameMinLength = 3;
     static final String tooShortName = "12";
     static final int maxHP = 50;
-    static final int maxMP = 30;
+    static final int maxMP = 500;
     static final String defaultWandName = "기본지팡이";
     static final double defaultWandPower = 1.0;
+    static public final int defaultWizardMP = 100;
+    static public final int defaultWizardHP = 30;
+
     private Wand wand = new Wand(defaultWandName, defaultWandPower);
 
     static int basePoint = 10;  // heal 기술 기본값
@@ -37,11 +40,11 @@ public class Wizard {
     }
 
     public Wizard(String name, int hp) {
-        this(name, hp, maxMP, new Wand(defaultWandName, defaultWandPower));
+        this(name, hp, defaultWizardMP, new Wand(defaultWandName, defaultWandPower));
     }
 
     public Wizard(String name) {
-        this(name, maxHP, maxMP, new Wand(defaultWandName, defaultWandPower));
+        this(name, defaultWizardHP, defaultWizardMP, new Wand(defaultWandName, defaultWandPower));
     }
 
     public String getName() {
@@ -92,8 +95,14 @@ public class Wizard {
         if (hero == null) {
             throw new IllegalArgumentException("Hero는 null 값이 올 수 없습니다.");
         }
-        int recoverPoint = (int) (basePoint * this.wand.getPower());
-        hero.setHP(hero.getHp() + recoverPoint);
+        if (this.getMP() >= 10) {
+            int recoverPoint = (int) (basePoint * this.wand.getPower());
+            hero.setHP(hero.getHP() + recoverPoint);
+            System.out.println("힐을 시전했습니다. " + hero.getName() + "HP : " + hero.getHP());
+            this.setMP(this.getMP() - 10);
+        } else {
+            System.out.println("마나가 부족합니다.");
+        }
     }
 
     public void fireball(Hero hero) {

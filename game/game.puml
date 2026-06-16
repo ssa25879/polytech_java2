@@ -1,0 +1,132 @@
+@startuml
+
+scale 2
+
+class SuperHero extends Hero {
+    - boolean isFlying
+
+    + SuperHero(String name, int hp)
+    + SuperHero(String name)
+    + SuperHero()
+
+    + void setFlying(boolean Flying)
+    + boolean isFlying()
+    + void run()
+}
+
+class Hero
+{
+    - int hp
+    - int maxHP
+
+    + String getName()
+    + int getHP()
+    + int getMaxHP()
+    + void setName(String name)
+    + void setHP(int hp)
+    + void setMaxHP(int maxHP)
+
+    + void attack()
+    + void run()
+}
+
+
+class Wizard
+{
+    - String name
+    - int hp
+    - int mp
+    - Wand wand
+
+    + int defaultWizardMP = 100
+
+    + {Constructor} Wizard(String name, int hp, int mp, Wand wand)
+    + {Constructor} Wizard(String name, int hp, int mp)
+    + {Constructor} Wizard(String name, int hp)
+    + {Constructor} Wizard(String name)
+
+    + String getName()
+    + void setName(String name)
+    + int getHP()
+    + void setHP(int hp)
+    + int getMP()
+    + void setMP(int mp)
+    + Wand getWand()
+    + void setWand(Wand wand)
+
+    + void heal(Hero hero)
+}
+
+class GreatWizard extends Wizard
+{
+    + int defaultGreatWizardMP = 150
+    + int recoverPoint = 25
+
+    + {Constructor} GreatWizard(String name, int hp, int mp, Wand wand)
+    + {Constructor} GreatWizard(String name, int hp, int mp)
+    + {Constructor} GreatWizard(String name, int hp)
+    + {Constructor} GreatWizard(String name)
+
+    + heal(Hero hero)
+    + superHeal(Hero hero)
+}
+
+class Slime
+{
+    ~ int slimeAttackPoint
+    - String suffix
+    - int hp
+    - int maxHP
+
+    + {Constructor} Slime(String suffix, int hp)
+
+    + String getSuffix()
+    + int getHP()
+    + int getMaxHP()
+
+    + void setSuffix(String suffix)
+    + void setHP(int hp)
+    + void setMaxHP(int MaxHP)
+}
+
+class PoisonSlime extends Slime
+{
+    - int poisonCount = 5
+
+    + {Constructor} PoisonSlime(String suffix, int hp)
+
+    + int getPoisonCount()
+    + void attack(Hero hero)
+}
+
+class Cleric
+{
+    ~ int maxHP
+    ~ int maxMP
+    ~ int selfAidMPCost = 5
+    ~ int randBoundary = 3
+    ~ Random rand
+
+    - String name
+    - int hp
+    - int mp
+
+    + {Constructor} Cleric(String name, int hp, int mp)
+    + {Constructor} Cleric(String name, int hp)
+    + {Constructor} Cleric(String name)
+
+    + int getSelfAidMPCost()
+    + String getName()
+    + int getHP()
+    + int getMP()
+
+    + void setName(String name)
+    + void setHP(int hp)
+    + void setMP(int mp)
+
+    + void selfAid()
+    + int pray(int second)
+
+}
+
+@enduml

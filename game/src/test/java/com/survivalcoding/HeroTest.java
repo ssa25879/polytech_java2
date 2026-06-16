@@ -19,13 +19,13 @@ class HeroTest {
         hero.attack();
 
         // then 검증
-        assertEquals(49, hero.getHp());
+        assertEquals(49, hero.getHP());
 
         // when 실행
         hero.attack();
 
         // then 검증
-        assertEquals(48, hero.getHp());
+        assertEquals(48, hero.getHP());
     }
 
     @Test

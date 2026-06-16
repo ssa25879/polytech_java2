@@ -28,11 +28,7 @@ class ClericTest {
         assertStats("set1 스탯 확인(전부 입력)", set1, testName, testHP, testMP);
         assertStats("set2 스탯 확인(이름, HP 입력)", set2, testName, testHP, Cleric.maxMP);
         assertStats("set3 스탯 확인(이름 입력)", set3, testName, Cleric.maxHP, Cleric.maxMP);
-
-        // 생성 안되는지 검증
-        assertThrows(IllegalArgumentException.class, () -> {
-            Cleric noNameCase = new Cleric();
-        });
+        
 
         // 최대, 최소 값을 지키지 않는 경우 생성이 안되는지 검증
         assertAll("최대값, 최소값을 지키지 않았을 경우 확인",
@@ -54,9 +50,9 @@ class ClericTest {
     // 스탯 확인을 위한 임시 함수
     private void assertStats(String headDescription, Cleric cleric, String exceptedName, int exceptedHP, int exceptedMP) {
         assertAll(headDescription,
-                () -> assertEquals(exceptedName, cleric.name, "이름 틀림"),
-                () -> assertEquals(exceptedHP, cleric.hp, "HP 틀림"),
-                () -> assertEquals(exceptedMP, cleric.mp, "MP 불일치")
+                () -> assertEquals(exceptedName, cleric.getName(), "이름 틀림"),
+                () -> assertEquals(exceptedHP, cleric.getHP(), "HP 틀림"),
+                () -> assertEquals(exceptedMP, cleric.getMP(), "MP 불일치")
         );
     }
 
@@ -70,27 +66,27 @@ class ClericTest {
 
         // given 준비
         Cleric test1 = new Cleric("testCleric1");
-        test1.hp = initSelfAidHP;
-        test1.mp = initSelfAidMP;
+        test1.setHP(initSelfAidHP);
+        test1.setMP(initSelfAidMP);
 
         // when 실행
         test1.selfAid();
 
         // then 검증
-        assertEquals(initSelfAidMP - test1.selfAidMPCost, test1.mp);
-        assertEquals(Cleric.maxHP, test1.hp);
+        assertEquals(initSelfAidMP - test1.getSelfAidMPCost(), test1.getMP());
+        assertEquals(Cleric.maxHP, test1.getHP());
 
         // mp가 부족할 경우 테스트
         // given 준비
-        test1.mp = mpEdgeCase;
-        test1.hp = initSelfAidHP;
+        test1.setMP(mpEdgeCase);
+        test1.setHP(initSelfAidHP);
 
         // when 실행
         test1.selfAid();
 
         // then 검증
-        assertNotEquals(Cleric.maxHP, test1.hp);
-        assertEquals(mpEdgeCase, test1.mp);
+        assertNotEquals(Cleric.maxHP, test1.getHP());
+        assertEquals(mpEdgeCase, test1.getMP());
     }
 
     @Test
@@ -107,7 +103,7 @@ class ClericTest {
         int tmp;    // 관측용 변수 생성
 
         // 초기값
-        test2.mp = initPrayMP;
+        test2.setMP(initPrayMP);
 
         // when 실행
         tmp = test2.pray(randTestSecond);
@@ -116,11 +112,11 @@ class ClericTest {
         // 피드백 이후 assert 관련 함수들을 찾아서 랜덤값 작동 확인 방법 개선
         // pray(int second)는 second + (0 ~ 2) 이기 때문에, 회복량은 (현재MP ~ 현재MP + 2) 가 되어야 함.
         assertTrue(tmp >= 0 && tmp <= 2, "랜덤함수 테스트실패");
-        assertTrue(test2.mp >= initPrayMP && test2.mp <= (initPrayMP + 2), "실제 마나 회복 테스트실패");
+        assertTrue(test2.getMP() >= initPrayMP && test2.getMP() <= (initPrayMP + 2), "실제 마나 회복 테스트실패");
 
         // 초기값 9로 maxMP를 넘기는 상황을 연축
-        test2.mp = overflowInitPrayMP;
-        final int correctAnswer = Cleric.maxMP - test2.mp;
+        test2.setMP(overflowInitPrayMP);
+        final int correctAnswer = Cleric.maxMP - test2.getMP();
 
         // when 실행
         // 무조건 maxMP를 넘기므로 1이 출력되도록 실행

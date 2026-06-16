@@ -36,8 +36,10 @@ class WandTest {
 
         // then
         assertEquals(changeName, mainTestWand.getName());
-        assertAll("이름이 null값이거나, 3문자 이하일 경우 테스트", () -> assertThrows(IllegalArgumentException.class, () -> mainTestWand.setName(null)),
-                () -> assertThrows(IllegalArgumentException.class, () -> mainTestWand.setName(tooShortName)));
+        assertAll("이름이 null값이거나, 3문자 이하일 경우 테스트",
+                () -> assertThrows(IllegalArgumentException.class, () -> mainTestWand.setName(null)),
+                () -> assertThrows(IllegalArgumentException.class, () -> mainTestWand.setName(tooShortName))
+        );
     }
 
     @Test

@@ -23,7 +23,7 @@ public class Wand {
         setName(name);
         setPower(power);
     }
-
+    
     public String getName() {
         return name;
     }

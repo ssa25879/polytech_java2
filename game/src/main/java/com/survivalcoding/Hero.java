@@ -4,9 +4,13 @@ import java.util.Random;
 
 public class Hero {
     static int money = 100;
+    static String defaultHeroName = "홍길동";
+    static int defaultHeroHP = 100;
 
     private String name;
     private int hp;
+    private int maxHP = 100;
+
 
     static void setRandomMoney() {
         money = new Random().nextInt(1000);
@@ -32,29 +36,48 @@ public class Hero {
         this.name = name;
     }
 
-    public int getHp() {
+    public int getHP() {
         return hp;
     }
 
     public void setHP(int hp) {
+        this.hp = Math.min(hp, maxHP);
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = Math.max(maxHP, 0);
+    }
+
+    public Hero(String name, int hp) {
+        this.name = name;
         this.hp = hp;
     }
 
-    Hero() {
-        this.name = "홍길동";
-        hp = 100;
+    public Hero(String name) {
+        this(name, defaultHeroHP);
     }
 
-    Hero(String name) {
-        this.name = name;
-        hp = 100;
+    public Hero() {
+        this(defaultHeroName, defaultHeroHP);
     }
-
     // 나는 공격하면 hp 가 1씩 빠진다
-    void attack() {
+
+    public void attack() {
         hp -= 1;
         // sout
         System.out.println("공격했다");
     }
 
+    public void run() {
+        System.out.println("도망쳤다");
+    }
+
+    public final void slip() {
+        hp -= 5;
+        System.out.println("미끄러졌다!");
+    }
 }
