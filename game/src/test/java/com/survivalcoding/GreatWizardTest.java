@@ -13,7 +13,10 @@ class GreatWizardTest {
     final String testWandName = Wizard.defaultWandName;
     final double testWandPower = Wizard.defaultWandPower;
     final int excessiveRecoveryAmount = 10;
+    final int healMPCost = GreatWizard.healMPCost;
     final int superHealTestHP = 1;
+    final int superHealMPCost = GreatWizard.superHealMPCost;
+
 
     GreatWizard testGreatWizard;
     Hero testHero;
@@ -47,12 +50,14 @@ class GreatWizardTest {
         // Given
         // testGreatWizard는 setUp에서 준비됨
         testHero.setHP(testHero.getMaxHP() - GreatWizard.recoverPoint);
+        int currentMP = testGreatWizard.getMP();
 
         // when
         testGreatWizard.heal(testHero);
 
         // then
-        assertEquals(testHero.getMaxHP(), testHero.getHP());
+        assertEquals(testHero.getMaxHP(), testHero.getHP(), "회복이 제대로 안됨");
+        assertEquals(currentMP - healMPCost, testGreatWizard.getMP(), "마나 소모가 안됨");
     }
 
     @Test
@@ -85,12 +90,14 @@ class GreatWizardTest {
         // given
         // testGreatWizard는 setUp에서 준비됨
         testHero.setHP(superHealTestHP);
+        int currentMP = testGreatWizard.getMP();
 
         // when
         testGreatWizard.superHeal(testHero);
 
         // then
         assertEquals(testHero.getMaxHP(), testHero.getHP());
+        assertEquals(currentMP - superHealMPCost, testGreatWizard.getMP(), "마나 소모가 안됨");
     }
 
     @Test

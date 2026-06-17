@@ -16,6 +16,8 @@ package com.survivalcoding;
 public class GreatWizard extends Wizard {
     public static final int defaultGreatWizardMP = 150;
     public static int recoverPoint = 25;
+    public static final int healMPCost = 5;
+    public static final int superHealMPCost = 50;
 
 
     public GreatWizard(String name, int hp, int mp, Wand wand) {
@@ -39,10 +41,10 @@ public class GreatWizard extends Wizard {
         if (hero == null) {
             throw new IllegalArgumentException("Hero는 null 값이 올 수 없습니다.");
         }
-        if (this.getMP() >= 5) {
+        if (this.getMP() >= healMPCost) {
             hero.setHP(hero.getHP() + recoverPoint);
             System.out.println("힐을 시전했습니다. " + hero.getName() + " HP : " + hero.getHP());
-            this.setMP(this.getMP() - 5);
+            this.setMP(this.getMP() - healMPCost);
         } else {
             System.out.println("마나가 부족합니다.");
         }
@@ -52,8 +54,8 @@ public class GreatWizard extends Wizard {
         if (hero == null) {
             throw new IllegalArgumentException("Hero는 null 값이 올 수 없습니다.");
         }
-        if (this.getMP() >= 50) {
-            this.setMP(this.getMP() - 50);
+        if (this.getMP() >= superHealMPCost) {
+            this.setMP(this.getMP() - superHealMPCost);
             hero.setHP(hero.getMaxHP());
             System.out.println("슈퍼 힐을 시전했습니다. " + hero.getName() + " HP : " + hero.getHP());
         } else {
