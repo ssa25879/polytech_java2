@@ -1,3 +1,4 @@
 rootProject.name = 'polytech_java2'
 include 'day01-basic'
 include 'game'
+include 'company'
