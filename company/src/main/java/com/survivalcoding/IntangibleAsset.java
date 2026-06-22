@@ -33,14 +33,14 @@ public abstract class IntangibleAsset extends Asset {
         return acquiredDate;
     }
 
-    public void setAcquiredDate(LocalDate acquiredDate) {
+    private void setAcquiredDate(LocalDate acquiredDate) {
         if (acquiredDate == null) {
             throw new IllegalArgumentException("취득일을 작성해야합니다.");
         }
         this.acquiredDate = acquiredDate;
     }
 
-    public void setAcquiredDate(String acquiredDate) {
+    private void setAcquiredDate(String acquiredDate) {
         if (acquiredDate == null) {
             throw new IllegalArgumentException("취득일을 작성해야합니다.");
         }

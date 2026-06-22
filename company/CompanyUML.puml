@@ -44,8 +44,8 @@ abstract class IntangibleAsset extends Asset {
     + LocalDate getAcquiredDate()
 
     + void setAssetType(String assetType)
-    + void setAcquiredDate(LocalDate acquiredDate)
-    + void setAcquiredDate(String acquiredDate)
+    - void setAcquiredDate(LocalDate acquiredDate)
+    - void setAcquiredDate(String acquiredDate)
 }
 
 class Book extends TangibleAsset {
@@ -55,7 +55,7 @@ class Book extends TangibleAsset {
 
     + String getIsBn()
 
-    + void setIsBn(String isBn)
+    - void setIsBn(String isBn)
 }
 
 class Computer extends TangibleAsset {
@@ -77,7 +77,7 @@ class Patent extends IntangibleAsset {
     + String getInventor()
     + int getPatentNumber()
 
-    + void setInventor(String inventor)
+    - void setInventor(String inventor)
     + void setPatentNumber(int patentNumber)
 }
 
