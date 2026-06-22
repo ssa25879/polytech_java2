@@ -1,0 +1,84 @@
+@startuml
+
+scale 1
+
+interface Thing {
+    + void setWeight(double weight)
+    + double getWeight()
+}
+
+abstract class Asset {
+    - String name
+
+    + {Constructor} Asset(String name)
+
+    + String getName()
+
+    + void setName(String name)
+}
+
+abstract class TangibleAsset extends Asset implements Thing {
+    - int price
+    - String color
+    - double weight
+
+    + {Constructor} TangibleAsset(String name, int price, String color, double weight)
+
+    + int getPrice()
+    + String getColor()
+    + double getWeight()
+
+    + void setPrice(int price)
+    + void setColor(String color)
+    + void setWeight(double weight)
+}
+
+abstract class IntangibleAsset extends Asset {
+    - String assetType
+    - LocalDate acquiredDate
+
+    + {Constructor} IntangibleAsset(String name, String assetType, LocalDate acquiredDate)
+    + {Constructor} IntangibleAsset(String name, String assetType, String acquiredDate)
+
+    + String getAssetType()
+    + LocalDate getAcquiredDate()
+
+    + void setAssetType(String assetType)
+    + void setAcquiredDate(LocalDate acquiredDate)
+    + void setAcquiredDate(String acquiredDate)
+}
+
+class Book extends TangibleAsset {
+    - String isBn
+
+    + {Constructor} Book(String name, int price, String color, double weight, String isBn)
+
+    + String getIsBn()
+
+    + void setIsBn(String isBn)
+}
+
+class Computer extends TangibleAsset {
+    - String makerName
+
+    + {Constructor} Computer(String name, int price, String color, double weight, String makerName)
+
+    + String getMakerName()
+
+    + void setMakerName(String makerName)
+}
+
+class Patent extends IntangibleAsset {
+    - String inventor
+    - int patentNumber
+
+    + {Constructor} Patent(String name, String assetType, LocalDate acquiredDate, String inventor, int patentNumber)
+
+    + String getInventor()
+    + int getPatentNumber()
+
+    + void setInventor(String inventor)
+    + void setPatentNumber(int patentNumber)
+}
+
+@enduml
