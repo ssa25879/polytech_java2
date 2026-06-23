@@ -1,6 +1,7 @@
 package com.survivalcoding;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public abstract class IntangibleAsset extends Asset {
     // name, date
@@ -12,6 +13,7 @@ public abstract class IntangibleAsset extends Asset {
         setAssetType(assetType);
         setAcquiredDate(acquiredDate);
     }
+
     public IntangibleAsset(String name, String assetType, String acquiredDate) {
         super(name);
         setAssetType(assetType);
@@ -37,7 +39,11 @@ public abstract class IntangibleAsset extends Asset {
         if (acquiredDate == null) {
             throw new IllegalArgumentException("취득일을 작성해야합니다.");
         }
-        this.acquiredDate = acquiredDate;
+        try {
+            this.acquiredDate = acquiredDate;
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("취득일 작성 형식이 틀립니다.");
+        }
     }
 
     private void setAcquiredDate(String acquiredDate) {
