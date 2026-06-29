@@ -2,16 +2,16 @@ package com.survivalcoding;
 
 public class StrongBox<E> {
     private E data;
+    private int usageCount = 0;
 
     public void put(E data) {
         this.data = data;
     }
 
     public E get(KeyType key) {
-        if (key.getDurability() <= 1) {
+        if (key.isUnlock(++this.usageCount)) {
             return this.data;
         } else {
-            key.setDurability(key.getDurability() - 1);
             return null;
         }
     }
