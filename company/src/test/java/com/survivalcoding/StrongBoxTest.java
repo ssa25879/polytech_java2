@@ -35,7 +35,7 @@ class StrongBoxTest {
             testStringBox.put(testStringPut);
 
             for (repeatCount = 0; repeatCount < key.getMaxDurability() - 1; repeatCount++) {
-                assertNull(testStringBox.get(key), repeatCount + "번째에서 Null값이 반환되지 않음");
+                assertNull(testStringBox.get(key), key.name() + " 키 타입의 " + repeatCount + "번째에서 Null값이 반환되지 않음");
             }
             // 각 사용횟수 도달 시 확인
             assertNotNull(testStringBox.get(key), repeatCount + 1 + " 사용 횟수에 도달했음에도 값이 반환되지 않음");
