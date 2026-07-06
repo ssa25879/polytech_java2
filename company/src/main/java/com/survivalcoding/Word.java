@@ -1,5 +1,7 @@
 package com.survivalcoding;
 
+import java.util.Objects;
+
 public class Word implements Cloneable {
     private String letters;
 
@@ -55,6 +57,12 @@ public class Word implements Cloneable {
     @Override
     public int hashCode() {
         return 31 * letters.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Word word)) return false;
+        return Objects.equals(letters, word.getLetters());
     }
 
     @Override
