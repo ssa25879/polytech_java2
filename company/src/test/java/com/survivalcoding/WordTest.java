@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WordTest {
     final String testString = "testString";
     final String changeString = "changeString";
-    final String chkVowel = "abcde fghijklmno pqrstuvwxyz";
+    final String chkVowel = "abcde fghijklmno pqrstuvwxyz ABCDE FGHIJKLM NOPQRS TUVWXYZ";
 
 
     @Test
@@ -35,7 +35,8 @@ class WordTest {
         // when - then
         for (int i = 0; i < chkWord.getLetters().length(); i++) {
             c = chkWord.getLetters().charAt(i);
-            chk = c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+            chk = c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                    c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
             assertSame(chk, chkWord.isVowel(i), i + 1 + "번째 글자에서 판정 오류 발생");
         }
 
@@ -52,7 +53,8 @@ class WordTest {
         // when - then
         for (int i = 0; i < chkWord.getLetters().length(); i++) {
             c = chkWord.getLetters().charAt(i);
-            chk = !(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') && c != ' ' && c != '\t';
+            chk = !(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                    c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') && c != ' ' && c != '\t';
             assertSame(chk, chkWord.isConsonant(i), i + 1 + "번째 글자에서 판정 오류 발생");
         }
     }

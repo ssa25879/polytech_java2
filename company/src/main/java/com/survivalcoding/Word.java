@@ -22,7 +22,7 @@ public class Word implements Cloneable {
 
     public boolean isVowel(int i) {
         // " ", "\t" 등을 감지하기 위함
-        if (letters.substring(i, i + 1).isBlank()) {
+        if (letters.substring(i, i + 1).isBlank() || !letters.substring(i, i + 1).matches("[a-zA-Z]")) {
             return false;
         }
 //        return letters.substring(i, i + 1).equals("a")
@@ -32,16 +32,25 @@ public class Word implements Cloneable {
 //                || letters.substring(i, i + 1).equals("u");
 
 //        charAt() 으로도 검증 가능
-        return letters.charAt(i) == 'a'
-                || letters.charAt(i) == 'e'
-                || letters.charAt(i) == 'i'
-                || letters.charAt(i) == 'o'
-                || letters.charAt(i) == 'u';
+//        return letters.charAt(i) == 'a'
+//                || letters.charAt(i) == 'e'
+//                || letters.charAt(i) == 'i'
+//                || letters.charAt(i) == 'o'
+//                || letters.charAt(i) == 'u';
+
+        boolean result = false;
+
+        for (Vowels a : Vowels.values()) {
+            result = letters.charAt(i) == a.toString().charAt(0);
+            if (result) break;
+        }
+
+        return result;
     }
 
     public boolean isConsonant(int i) {
         // " ", "\t" 등을 감지하기 위함
-        if (letters.substring(i, i + 1).isBlank()) {
+        if (letters.substring(i, i + 1).isBlank() || !letters.substring(i, i + 1).matches("[a-zA-Z]")) {
             return false;
         }
         return !isVowel(i);
